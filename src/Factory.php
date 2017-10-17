@@ -5,6 +5,7 @@ namespace HelloFresh\Stats;
 
 use HelloFresh\Stats\Client\Log;
 use HelloFresh\Stats\Client\NoOp;
+use HelloFresh\Stats\Client\StatsD;
 use Psr\Log\LoggerInterface;
 
 class Factory
@@ -17,18 +18,17 @@ class Factory
      * Builds Stats Client instance.
      *
      * @param string $dsn
-     * @param string $prefix
      * @param LoggerInterface $logger
      *
      * @return Client
      * @throws \Exception
      */
-    public static function build($dsn, $prefix, LoggerInterface $logger)
+    public static function build($dsn, LoggerInterface $logger)
     {
         $url = parse_url($dsn);
         switch ($url['scheme']) {
             case static::STATSD:
-                return null;
+                return new StatsD($dsn);
 
             case static::LOG:
                 return new Log($logger);

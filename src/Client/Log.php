@@ -3,24 +3,16 @@
 namespace HelloFresh\Stats\Client;
 
 
-use HelloFresh\Stats\Bucket;
-use HelloFresh\Stats\Bucket\MetricOperation;
 use HelloFresh\Stats\Client;
-use HelloFresh\Stats\HTTPMetricAlterCallback;
 use HelloFresh\Stats\Incrementer;
 use HelloFresh\Stats\State;
 use HelloFresh\Stats\Timer;
-use Psr\Http\Message\RequestInterface;
 use Psr\Log\LoggerInterface;
 
-class Log implements Client
+class Log extends Base implements Client
 {
     /** @var LoggerInterface */
     protected $logger;
-    /** @var string */
-    protected $httpRequestSection;
-    /** @var HTTPMetricAlterCallback */
-    protected $httpMetricAlterCallback;
 
     /**
      * Log constructor.
@@ -44,96 +36,16 @@ class Log implements Client
     /**
      * @inheritdoc
      */
-    public function trackRequest(RequestInterface $request, Timer $timer, $success)
+    protected function getIncrementer()
     {
-        $bucket = new Bucket\HTTPRequest(
-            $this->httpRequestSection, $request, $success, $this->getHTTPMetricAlterCallback()
-        );
-        $incrementer = new Incrementer\Log($this->logger);
-
-        $timer->finish($bucket->metric());
-        $incrementer->incrementAll($bucket);
-
-        return $this;
+        return new Incrementer\Log($this->logger);
     }
 
     /**
      * @inheritdoc
      */
-    public function trackOperation($section, MetricOperation $operation, $success, Timer $timer = null, $n = 1)
+    protected function getState()
     {
-        $bucket = new Bucket\Plain($section, $operation, $success);
-        $incrementer = new Incrementer\Log($this->logger);
-
-        if (null !== $timer) {
-            $timer->finish($bucket->metricWithSuffix());
-        }
-        $incrementer->incrementAll($bucket, $n);
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function trackMetric($section, MetricOperation $operation, Timer $timer = null, $n = 1)
-    {
-        $bucket = new Bucket\Plain($section, $operation, true);
-        $incrementer = new Incrementer\Log($this->logger);
-
-        if (null !== $timer) {
-            $timer->finish($bucket->metricWithSuffix());
-        }
-        $incrementer->increment($bucket->metric());
-        $incrementer->increment($bucket->metricTotal());
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function trackState($section, MetricOperation $operation, $value)
-    {
-        $bucket = new Bucket\Plain($section, $operation, true);
-        $state = new State\Log($this->logger);
-
-        $state->set($bucket->metric(), $value);
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setHTTPMetricAlterCallback(HTTPMetricAlterCallback $callback)
-    {
-        $this->httpMetricAlterCallback = $callback;
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getHTTPMetricAlterCallback()
-    {
-        return $this->httpMetricAlterCallback;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setHTTPRequestSection($section)
-    {
-        $this->httpRequestSection = $section;
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function resetHTTPRequestSection()
-    {
-        return $this->setHTTPRequestSection(Bucket::DEFAULT_HTTP_REQUEST_SECTION);
+        return new State\Log($this->logger);
     }
 }
