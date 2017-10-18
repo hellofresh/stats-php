@@ -23,13 +23,13 @@ class HTTPRequest extends Plain
 
     /**
      * @param RequestInterface $request
-     * @param HTTPMetricAlterCallback $callback
+     * @param HTTPMetricAlterCallback|null $callback
      *
      * @return MetricOperation|mixed
      */
-    public function buildMetricOperation(RequestInterface $request, HTTPMetricAlterCallback $callback)
+    public function buildMetricOperation(RequestInterface $request, HTTPMetricAlterCallback $callback = null)
     {
-        $operation = new MetricOperation(strtolower($request->getMethod()));
+        $operation = new MetricOperation([strtolower($request->getMethod())]);
         if ($request->getUri()->getPath() !== '/') {
             $partsFilled = 1;
             foreach (explode('/', $request->getUri()->getPath()) as $fragment) {
