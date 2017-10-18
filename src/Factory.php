@@ -25,8 +25,7 @@ class Factory
      */
     public static function build($dsn, LoggerInterface $logger)
     {
-        $url = parse_url($dsn);
-        switch ($url['scheme']) {
+        switch (parse_url($dsn, PHP_URL_SCHEME)) {
             case static::STATSD:
                 return new StatsD($dsn);
 

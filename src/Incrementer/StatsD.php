@@ -6,7 +6,7 @@ namespace HelloFresh\Stats\Incrementer;
 use HelloFresh\Stats\Incrementer;
 use League\StatsD\Client;
 
-class StatsD extends Base implements Incrementer
+class StatsD extends AbstractIncrementer implements Incrementer
 {
     /** @var Client */
     protected $client;

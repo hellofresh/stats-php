@@ -6,7 +6,7 @@ namespace HelloFresh\Stats\Incrementer;
 use HelloFresh\Stats\Incrementer;
 use Psr\Log\LoggerInterface;
 
-class Log extends Base implements Incrementer
+class Log extends AbstractIncrementer implements Incrementer
 {
     /** @var LoggerInterface */
     protected $logger;

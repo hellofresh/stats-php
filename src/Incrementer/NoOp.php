@@ -5,7 +5,7 @@ namespace HelloFresh\Stats\Incrementer;
 
 use HelloFresh\Stats\Incrementer;
 
-class NoOp extends Base implements Incrementer
+class NoOp extends AbstractIncrementer implements Incrementer
 {
     /**
      * @inheritdoc

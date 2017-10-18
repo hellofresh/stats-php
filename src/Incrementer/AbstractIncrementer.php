@@ -6,7 +6,7 @@ namespace HelloFresh\Stats\Incrementer;
 use HelloFresh\Stats\Bucket;
 use HelloFresh\Stats\Incrementer;
 
-abstract class Base implements Incrementer
+abstract class AbstractIncrementer implements Incrementer
 {
     /**
      * @inheritdoc

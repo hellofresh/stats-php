@@ -8,11 +8,6 @@ use Psr\Http\Message\RequestInterface;
 
 class HTTPRequest extends Plain
 {
-    /** @var RequestInterface */
-    protected $request;
-    /** @var HTTPMetricAlterCallback */
-    protected $httpMetricAlterCallback;
-
     /**
      * HTTPRequest constructor.
      *
@@ -23,22 +18,22 @@ class HTTPRequest extends Plain
      */
     public function __construct($section, RequestInterface $request, $success, HTTPMetricAlterCallback $callback = null)
     {
-        $this->request = $request;
-        $this->httpMetricAlterCallback = $callback;
-
-        parent::__construct($section, $this->buildMetricOperation(), $success);
+        parent::__construct($section, $this->buildMetricOperation($request, $callback), $success);
     }
 
     /**
-     * @return MetricOperation
+     * @param RequestInterface $request
+     * @param HTTPMetricAlterCallback $callback
+     *
+     * @return MetricOperation|mixed
      */
-    public function buildMetricOperation()
+    public function buildMetricOperation(RequestInterface $request, HTTPMetricAlterCallback $callback)
     {
-        $operation = new MetricOperation(strtolower($this->request->getMethod()));
-        if ($this->request->getUri()->getPath() != '/') {
+        $operation = new MetricOperation(strtolower($request->getMethod()));
+        if ($request->getUri()->getPath() !== '/') {
             $partsFilled = 1;
-            foreach (explode('/', $this->request->getUri()->getPath()) as $fragment) {
-                if ($fragment == '') {
+            foreach (explode('/', $request->getUri()->getPath()) as $fragment) {
+                if ($fragment === '') {
                     continue;
                 }
 
@@ -50,8 +45,8 @@ class HTTPRequest extends Plain
             }
         }
 
-        if (null != $this->httpMetricAlterCallback) {
-            $operation = call_user_func_array($this->httpMetricAlterCallback, [$operation, $this->request]);
+        if (null !== $callback) {
+            $operation = call_user_func_array($callback, [$operation, $request]);
         }
 
         return $operation;

@@ -12,7 +12,7 @@ use HelloFresh\Stats\State;
 use HelloFresh\Stats\Timer;
 use Psr\Http\Message\RequestInterface;
 
-abstract class Base implements Client
+abstract class AbstractClient implements Client
 {
     /** @var string */
     protected $httpRequestSection;

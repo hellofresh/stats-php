@@ -10,7 +10,7 @@ use HelloFresh\Stats\State;
 use HelloFresh\Stats\Timer\StatsD as StatsDTimer;
 use League\StatsD\Client as StatsDClient;
 
-class StatsD extends Base implements Client
+class StatsD extends AbstractClient implements Client
 {
     /** @var string */
     protected $httpRequestSection;
@@ -19,6 +19,11 @@ class StatsD extends Base implements Client
     /** @var StatsDClient */
     protected $client;
 
+    /** @var Incrementer\StatsD */
+    protected $incrementer;
+    /** @var State\StatsD */
+    protected $state;
+
     /**
      * StatsD constructor.
      *
@@ -26,12 +31,12 @@ class StatsD extends Base implements Client
      */
     public function __construct($dsn)
     {
-        $url = parse_url($dsn);
+        $url = (array)parse_url($dsn);
 
         $params = parse_str(empty($url['query']) ? '' : $url['query']);
         $options = [
-            'host' => $url['host'],
-            'port' => $url['port'],
+            'host' => empty($url['host']) ? 'localhost' : '',
+            'port' => empty($url['port']) ? $url['port'] : 8125,
             'namespace' => empty($params['ns']) ? '' : $params['ns'],
             'timeout' => empty($params['timeout']) ? null : (float)$params['timeout'],
             'throwConnectionExceptions' => empty($params['error']) ? true : (bool)$params['error'],
@@ -53,7 +58,10 @@ class StatsD extends Base implements Client
      */
     protected function getIncrementer()
     {
-        return new Incrementer\StatsD($this->client);
+        if (null === $this->incrementer) {
+            $this->incrementer = new Incrementer\StatsD($this->client);
+        }
+        return $this->incrementer;
     }
 
     /**
@@ -61,6 +69,9 @@ class StatsD extends Base implements Client
      */
     protected function getState()
     {
-        return new State\StatsD($this->client);
+        if (null === $this->state) {
+            $this->state = new State\StatsD($this->client);
+        }
+        return $this->state;
     }
 }

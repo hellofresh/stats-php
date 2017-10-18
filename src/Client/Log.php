@@ -9,10 +9,15 @@ use HelloFresh\Stats\State;
 use HelloFresh\Stats\Timer;
 use Psr\Log\LoggerInterface;
 
-class Log extends Base implements Client
+class Log extends AbstractClient implements Client
 {
     /** @var LoggerInterface */
     protected $logger;
+
+    /** @var Incrementer\Log */
+    protected $incrementer;
+    /** @var State\Log */
+    protected $state;
 
     /**
      * Log constructor.
@@ -38,7 +43,10 @@ class Log extends Base implements Client
      */
     protected function getIncrementer()
     {
-        return new Incrementer\Log($this->logger);
+        if (null === $this->incrementer) {
+            $this->incrementer = new Incrementer\Log($this->logger);
+        }
+        return $this->incrementer;
     }
 
     /**
@@ -46,6 +54,9 @@ class Log extends Base implements Client
      */
     protected function getState()
     {
-        return new State\Log($this->logger);
+        if (null === $this->state) {
+            $this->state = new State\Log($this->logger);
+        }
+        return $this->state;
     }
 }

@@ -21,7 +21,7 @@ class MetricOperation extends \SplFixedArray
         // ensure that operations is not bigger than allowed
         array_splice($operations, static::LENGTH);
 
-        foreach ($operations as $key => $value) {
+        foreach (array_values($operations) as $key => $value) {
             $this->offsetSet($key, $value);
         }
 
