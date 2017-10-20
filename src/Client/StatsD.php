@@ -31,18 +31,27 @@ class StatsD extends AbstractClient implements Client
      */
     public function __construct($dsn)
     {
+        $this->client = new StatsDClient();
+        $this->configure($dsn);
+    }
+
+    /**
+     * @param string $dsn
+     */
+    protected function configure($dsn)
+    {
         $url = (array)parse_url($dsn);
 
         $params = parse_str(empty($url['query']) ? '' : $url['query']);
         $options = [
             'host' => empty($url['host']) ? 'localhost' : '',
             'port' => empty($url['port']) ? $url['port'] : 8125,
-            'namespace' => empty($params['ns']) ? '' : $params['ns'],
+            'namespace' => empty($url['path']) ? '' : trim($url['path'], '/'),
             'timeout' => empty($params['timeout']) ? null : (float)$params['timeout'],
             'throwConnectionExceptions' => empty($params['error']) ? true : (bool)$params['error'],
         ];
 
-        $this->client = (new StatsDClient())->configure($options);
+        $this->client->configure($options);
     }
 
     /**
