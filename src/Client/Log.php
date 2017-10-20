@@ -35,7 +35,7 @@ class Log extends AbstractClient implements Client
      */
     public function buildTimer()
     {
-        return new Timer\Memory();
+        return new Timer\Log($this->logger);
     }
 
     /**

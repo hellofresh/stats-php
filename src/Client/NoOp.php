@@ -16,6 +16,14 @@ class NoOp extends AbstractClient implements Client
     protected $state;
 
     /**
+     * NoOp constructor.
+     */
+    public function __construct()
+    {
+        $this->resetHTTPRequestSection();
+    }
+
+    /**
      * @inheritdoc
      */
     public function buildTimer()

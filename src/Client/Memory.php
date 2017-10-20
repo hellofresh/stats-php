@@ -18,6 +18,14 @@ class Memory extends AbstractClient implements Client
     protected $timers;
 
     /**
+     * Memory constructor.
+     */
+    public function __construct()
+    {
+        $this->resetHTTPRequestSection();
+    }
+
+    /**
      * @inheritdoc
      */
     protected function getIncrementer()

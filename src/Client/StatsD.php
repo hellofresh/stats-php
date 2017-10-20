@@ -7,7 +7,7 @@ use HelloFresh\Stats\Client;
 use HelloFresh\Stats\HTTPMetricAlterCallback;
 use HelloFresh\Stats\Incrementer;
 use HelloFresh\Stats\State;
-use HelloFresh\Stats\Timer\StatsD as StatsDTimer;
+use HelloFresh\Stats\Timer;
 use League\StatsD\Client as StatsDClient;
 
 class StatsD extends AbstractClient implements Client
@@ -33,6 +33,7 @@ class StatsD extends AbstractClient implements Client
     {
         $this->client = new StatsDClient();
         $this->configure($dsn);
+        $this->resetHTTPRequestSection();
     }
 
     /**
@@ -42,13 +43,13 @@ class StatsD extends AbstractClient implements Client
     {
         $url = (array)parse_url($dsn);
 
-        $params = parse_str(empty($url['query']) ? '' : $url['query']);
+        parse_str(empty($url['query']) ? '' : $url['query'], $params);
         $options = [
-            'host' => empty($url['host']) ? 'localhost' : '',
-            'port' => empty($url['port']) ? $url['port'] : 8125,
+            'host' => empty($url['host']) ? 'localhost' : $url['host'],
+            'port' => empty($url['port']) ? 8125 : $url['port'],
             'namespace' => empty($url['path']) ? '' : trim($url['path'], '/'),
             'timeout' => empty($params['timeout']) ? null : (float)$params['timeout'],
-            'throwConnectionExceptions' => empty($params['error']) ? true : (bool)$params['error'],
+            'throwConnectionExceptions' => isset($params['error']) ? (bool)$params['error'] : true,
         ];
 
         $this->client->configure($options);
@@ -59,7 +60,7 @@ class StatsD extends AbstractClient implements Client
      */
     public function buildTimer()
     {
-        return new StatsDTimer($this->client);
+        return new Timer\StatsD($this->client);
     }
 
     /**
