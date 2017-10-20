@@ -18,9 +18,9 @@ abstract class AbstractIncrementer implements Incrementer
      */
     public function incrementAll(Bucket $bucket, $n = 1)
     {
-        $this->increment($bucket->metric(), $n);
-        $this->increment($bucket->metricWithSuffix(), $n);
-        $this->increment($bucket->metricTotal(), $n);
-        $this->increment($bucket->metricTotalWithSuffix(), $n);
+        $this->increment($bucket->metric(), $n)
+            ->increment($bucket->metricWithSuffix(), $n)
+            ->increment($bucket->metricTotal(), $n)
+            ->increment($bucket->metricTotalWithSuffix(), $n);
     }
 }

@@ -27,5 +27,6 @@ class StatsD extends AbstractIncrementer implements Incrementer
     public function increment($metric, $n = 1)
     {
         $this->client->increment($metric, $n);
+        return $this;
     }
 }

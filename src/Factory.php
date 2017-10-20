@@ -4,6 +4,7 @@ namespace HelloFresh\Stats;
 
 
 use HelloFresh\Stats\Client\Log;
+use HelloFresh\Stats\Client\Memory;
 use HelloFresh\Stats\Client\NoOp;
 use HelloFresh\Stats\Client\StatsD;
 use Psr\Log\LoggerInterface;
@@ -13,6 +14,7 @@ class Factory
     const STATSD = 'statsd';
     const LOG = 'log';
     const NOOP = 'noop';
+    const MEMORY = 'memory';
 
     /**
      * Builds Stats Client instance.
@@ -34,6 +36,9 @@ class Factory
 
             case static::NOOP:
                 return new NoOp();
+
+            case static::MEMORY:
+                return new Memory();
         }
 
         throw new \RuntimeException('Unknown client type');

@@ -12,5 +12,6 @@ class NoOp extends AbstractIncrementer implements Incrementer
      */
     public function increment($metric, $n = 1)
     {
+        return $this;
     }
 }

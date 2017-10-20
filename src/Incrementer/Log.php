@@ -27,5 +27,6 @@ class Log extends AbstractIncrementer implements Incrementer
     public function increment($metric, $n = 1)
     {
         $this->logger->debug('Stats counter increment', ['metric' => $metric, 'n' => $n]);
+        return $this;
     }
 }

@@ -19,6 +19,7 @@ dashboards to track activity and problems.
 * Several stats backends:
   * `log` for development environment
   * `statsd` for production
+  * `memory` for testing purpose, to track stats operations in unit tests
   * `noop` for environments that do not require any stats gathering
 * Fixed metric sections count for all metrics to allow easy monitoring/alerting setup in `grafana`
 * Easy to build HTTP requests metrics - timing and count

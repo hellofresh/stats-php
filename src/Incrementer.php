@@ -11,7 +11,7 @@ interface Incrementer
      * @param string $metric
      * @param int $n
      *
-     * @return void
+     * @return self
      */
     public function increment($metric, $n = 1);
 
