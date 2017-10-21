@@ -72,8 +72,8 @@ abstract class AbstractClient implements Client
         if (null !== $timer) {
             $timer->finish($bucket->metricWithSuffix());
         }
-        $incrementer->increment($bucket->metric());
-        $incrementer->increment($bucket->metricTotal());
+        $incrementer->increment($bucket->metric(), $n);
+        $incrementer->increment($bucket->metricTotal(), $n);
 
         return $this;
     }

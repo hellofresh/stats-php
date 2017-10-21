@@ -3,10 +3,6 @@
 namespace HelloFresh\Stats;
 
 
-use HelloFresh\Stats\Client\Log;
-use HelloFresh\Stats\Client\Memory;
-use HelloFresh\Stats\Client\NoOp;
-use HelloFresh\Stats\Client\StatsD;
 use Psr\Log\LoggerInterface;
 
 class Factory
@@ -29,16 +25,16 @@ class Factory
     {
         switch (parse_url($dsn, PHP_URL_SCHEME)) {
             case static::STATSD:
-                return new StatsD($dsn);
+                return new Client\StatsD($dsn);
 
             case static::LOG:
-                return new Log($logger);
+                return new Client\Log($logger);
 
             case static::NOOP:
-                return new NoOp();
+                return new Client\NoOp();
 
             case static::MEMORY:
-                return new Memory();
+                return new Client\Memory();
         }
 
         throw new \RuntimeException('Unknown client type');

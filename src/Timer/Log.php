@@ -39,7 +39,10 @@ class Log implements Timer
     {
         $this->logger->debug(
             'Stats timer finished',
-            ['elapsed' => (new Metric($metric, microtime(true) - $this->startedAt))->getElapsedFormatted()]
+            [
+                'metric' => $metric,
+                'elapsed' => (new Metric('', microtime(true) - $this->startedAt))->getElapsedFormatted(),
+            ]
         );
         return $this;
     }

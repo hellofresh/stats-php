@@ -25,7 +25,7 @@ class HTTPRequest extends Plain
      * @param RequestInterface $request
      * @param HTTPMetricAlterCallback|null $callback
      *
-     * @return MetricOperation|mixed
+     * @return MetricOperation
      */
     public function buildMetricOperation(RequestInterface $request, HTTPMetricAlterCallback $callback = null)
     {

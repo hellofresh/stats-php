@@ -7,7 +7,6 @@ use HelloFresh\Stats\State;
 
 class NoOp implements State
 {
-
     /**
      * @param string $metric
      * @param int $state

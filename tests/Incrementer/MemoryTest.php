@@ -35,4 +35,46 @@ class MemoryTest extends TestCase
 
         $this->assertArrayNotHasKey(uniqid(), $metrics);
     }
+
+    public function testIncrementAll()
+    {
+        /** @var \PHPUnit_Framework_MockObject_MockObject|\HelloFresh\Stats\Bucket $bucket */
+        $bucket = $this->getMockBuilder('\HelloFresh\Stats\Bucket')->getMock();
+
+        $n = mt_rand();
+        $metric = uniqid('metric', true);
+        $metricWithSuffix = uniqid('metricWithSuffix', true);
+        $metricTotal = uniqid('metricTotal', true);
+        $metricTotalWithSuffix = uniqid('metricTotalWithSuffix', true);
+
+        $bucket->expects($this->once())
+            ->method('metric')
+            ->will($this->returnValue($metric));
+        $bucket->expects($this->once())
+            ->method('metricWithSuffix')
+            ->will($this->returnValue($metricWithSuffix));
+        $bucket->expects($this->once())
+            ->method('metricTotal')
+            ->will($this->returnValue($metricTotal));
+        $bucket->expects($this->once())
+            ->method('metricTotalWithSuffix')
+            ->will($this->returnValue($metricTotalWithSuffix));
+
+        $i = new Memory();
+        $i->incrementAll($bucket, $n);
+
+        $metrics = $i->getMetrics();
+
+        $this->assertArrayHasKey($metric, $metrics);
+        $this->assertEquals($n, $metrics[$metric]);
+
+        $this->assertArrayHasKey($metricWithSuffix, $metrics);
+        $this->assertEquals($n, $metrics[$metricWithSuffix]);
+
+        $this->assertArrayHasKey($metricTotal, $metrics);
+        $this->assertEquals($n, $metrics[$metricTotal]);
+
+        $this->assertArrayHasKey($metricTotalWithSuffix, $metrics);
+        $this->assertEquals($n, $metrics[$metricTotalWithSuffix]);
+    }
 }

@@ -50,12 +50,16 @@ use HelloFresh\Stats\Factory;
 
 $statsdClient = Factory::build('statsd://statsd-host:8125/prefix?timeout=2.5&error=1', $logger);
 
-$logClient = Factory::build('log://', $logger);
+// php parse_url does not support url with only schema part set
+$logClient = Factory::build('log://log', $logger);
 
-$noopClient = Factory::build('noop://', $logger);
+// php parse_url does not support url with only schema part set
+$noopClient = Factory::build('noop://noop', $logger);
 
-$memoryClient = Factory::build('memory://', $logger);
+// php parse_url does not support url with only schema part set
+$memoryClient = Factory::build('memory://memory', $logger);
 
+// php parse_url does not support url with only schema part set
 $statsClient = Factory::build(getenv('STATS_DSN'), $logger);
 ```
 
