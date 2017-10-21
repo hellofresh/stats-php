@@ -7,7 +7,7 @@
 # hellofresh/stats-php
 
 [![Build Status](https://travis-ci.org/hellofresh/stats-php.svg?branch=master)](https://travis-ci.org/hellofresh/stats-php)
-[![Coverage Status](https://codecov.io/gh/hellofresh/stats-php/branch/master/graph/badge.svg)](https://codecov.io/gh/hellofresh/stats-php)
+[![codecov](https://codecov.io/gh/hellofresh/stats-php/branch/master/graph/badge.svg)](https://codecov.io/gh/hellofresh/stats-php)
 
 > Generic Stats library written in PHP
 
