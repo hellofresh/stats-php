@@ -7,8 +7,10 @@ php:
 
 script:
   - composer install -n
-  - vendor/bin/phpunit --coverage-clover=coverage.xml
-  - if [ "$TRAVIS_SECURE_ENV_VARS" == "true" ]; then bash <(curl -s https://codecov.io/bash); fi
+  - vendor/bin/phpunit
   - rm -rf vendor
   - composer update --prefer-lowest -n
-  - vendor/bin/phpunit
+  - vendor/bin/phpunit --coverage-clover=coverage.xml
+
+after_success:
+  - if [ "$TRAVIS_SECURE_ENV_VARS" == "true" ]; then bash <(curl -s https://codecov.io/bash); fi
