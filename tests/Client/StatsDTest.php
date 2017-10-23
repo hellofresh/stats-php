@@ -13,6 +13,10 @@ class StatsDTest extends TestCase
 {
     public function testConfigure()
     {
+        if (!class_exists('\League\StatsD\Client')) {
+            $this->markTestSkipped('Missing league/statsd package');
+        }
+
         $statsClient = $this->getMockBuilder('\HelloFresh\Stats\Client\StatsD')
             ->disableOriginalConstructor()
             ->getMock();
@@ -40,6 +44,10 @@ class StatsDTest extends TestCase
 
     public function testInstances()
     {
+        if (!class_exists('\League\StatsD\Client')) {
+            $this->markTestSkipped('Missing league/statsd package');
+        }
+
         $statsClient = new StatsD('statsd://');
         $this->assertInstanceOf(Stats\Timer\StatsD::class, $statsClient->buildTimer());
 
@@ -56,6 +64,10 @@ class StatsDTest extends TestCase
 
     public function testHTTPRequestSection()
     {
+        if (!class_exists('\League\StatsD\Client')) {
+            $this->markTestSkipped('Missing league/statsd package');
+        }
+
         $section = uniqid('section', true);
 
         /** @var \PHPUnit_Framework_MockObject_MockObject|\League\StatsD\Client $statsd */

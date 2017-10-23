@@ -7,6 +7,7 @@ php:
 
 script:
   - composer install -n
+  - vendor/bin/php-cs-fixer fix --dry-run -v
   - vendor/bin/phpunit
   - rm -rf vendor
   - composer update --prefer-lowest -n

@@ -14,6 +14,10 @@ class StatsDTest extends TestCase
 
     public function testSet()
     {
+        if (!class_exists('\League\StatsD\Client')) {
+            $this->markTestSkipped('Missing league/statsd package');
+        }
+
         /** @var \PHPUnit_Framework_MockObject_MockObject|\League\StatsD\Client $statsd */
         $statsd = $this->getMockBuilder('\League\StatsD\Client')->setMethods(['gauge'])->getMock();
 

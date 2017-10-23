@@ -11,23 +11,23 @@ class HTTPRequest extends Plain
     /**
      * HTTPRequest constructor.
      *
-     * @param string $section
-     * @param RequestInterface $request
-     * @param bool $success
+     * @param string                       $section
+     * @param RequestInterface             $request
+     * @param bool                         $success
      * @param HTTPMetricAlterCallback|null $callback
      */
     public function __construct($section, RequestInterface $request, $success, HTTPMetricAlterCallback $callback = null)
     {
-        parent::__construct($section, $this->buildMetricOperation($request, $callback), $success);
+        parent::__construct($section, static::buildMetricOperation($request, $callback), $success);
     }
 
     /**
-     * @param RequestInterface $request
+     * @param RequestInterface             $request
      * @param HTTPMetricAlterCallback|null $callback
      *
      * @return MetricOperation
      */
-    public function buildMetricOperation(RequestInterface $request, HTTPMetricAlterCallback $callback = null)
+    public static function buildMetricOperation(RequestInterface $request, HTTPMetricAlterCallback $callback = null)
     {
         $operation = new MetricOperation([strtolower($request->getMethod())]);
         if ($request->getUri()->getPath() !== '/') {
