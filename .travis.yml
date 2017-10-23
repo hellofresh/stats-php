@@ -5,12 +5,13 @@ php:
   - '7.0'
   - '7.1'
 
+env:
+  - COMPOSER_UPDATE=
+  - COMPOSER_UPDATE=--prefer-lowest
+
 script:
-  - composer install -n
+  - composer update $COMPOSER_UPDATE -n
   - vendor/bin/php-cs-fixer fix --dry-run -v
-  - vendor/bin/phpunit
-  - rm -rf vendor
-  - composer update --prefer-lowest -n
   - vendor/bin/phpunit --coverage-clover=coverage.xml
 
 after_success:

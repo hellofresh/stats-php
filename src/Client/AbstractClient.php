@@ -33,7 +33,10 @@ abstract class AbstractClient implements Client
     public function trackRequest(RequestInterface $request, Timer $timer, $success)
     {
         $bucket = new Bucket\HTTPRequest(
-            $this->httpRequestSection, $request, $success, $this->getHTTPMetricAlterCallback()
+            $this->httpRequestSection,
+            $request,
+            $success,
+            $this->getHTTPMetricAlterCallback()
         );
         $incrementer = $this->getIncrementer();
 
