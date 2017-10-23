@@ -3,8 +3,6 @@ namespace HelloFresh\Stats\Client;
 
 use HelloFresh\Stats;
 use HelloFresh\Stats\Bucket;
-use HelloFresh\Stats\Incrementer;
-use HelloFresh\Stats\State;
 use PHPUnit\Framework\TestCase;
 
 class MemoryTest extends TestCase
@@ -18,16 +16,6 @@ class MemoryTest extends TestCase
     {
         $statsClient = new Memory();
         $this->assertInstanceOf(Stats\Timer\Memory::class, $statsClient->buildTimer());
-
-        $reflection = new \ReflectionClass($statsClient);
-
-        $methodIncrementer = $reflection->getMethod('getIncrementer');
-        $methodIncrementer->setAccessible(true);
-        $this->assertInstanceOf(Incrementer\Memory::class, $methodIncrementer->invoke($statsClient));
-
-        $methodState = $reflection->getMethod('getState');
-        $methodState->setAccessible(true);
-        $this->assertInstanceOf(State\Memory::class, $methodState->invoke($statsClient));
     }
 
     public function testHTTPRequestSection()

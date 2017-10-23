@@ -5,7 +5,6 @@ use HelloFresh\Stats;
 use HelloFresh\Stats\Bucket;
 use HelloFresh\Stats\Bucket\MetricOperation;
 use HelloFresh\Stats\Bucket\Plain;
-use HelloFresh\Stats\Incrementer;
 use HelloFresh\Stats\State;
 use PHPUnit\Framework\TestCase;
 
@@ -23,16 +22,6 @@ class LogTest extends TestCase
 
         $statsClient = new Log($logger);
         $this->assertInstanceOf(Stats\Timer\Log::class, $statsClient->buildTimer());
-
-        $reflection = new \ReflectionClass($statsClient);
-
-        $methodIncrementer = $reflection->getMethod('getIncrementer');
-        $methodIncrementer->setAccessible(true);
-        $this->assertInstanceOf(Incrementer\Log::class, $methodIncrementer->invoke($statsClient));
-
-        $methodState = $reflection->getMethod('getState');
-        $methodState->setAccessible(true);
-        $this->assertInstanceOf(State\Log::class, $methodState->invoke($statsClient));
     }
 
     public function testTrackRequest()

@@ -3,8 +3,6 @@ namespace HelloFresh\Stats\Client;
 
 use HelloFresh\Stats;
 use HelloFresh\Stats\Bucket;
-use HelloFresh\Stats\Incrementer;
-use HelloFresh\Stats\State;
 use PHPUnit\Framework\TestCase;
 
 class StatsDTest extends TestCase
@@ -42,16 +40,6 @@ class StatsDTest extends TestCase
 
         $statsClient = new StatsD('statsd://');
         $this->assertInstanceOf(Stats\Timer\StatsD::class, $statsClient->buildTimer());
-
-        $reflection = new \ReflectionClass($statsClient);
-
-        $methodIncrementer = $reflection->getMethod('getIncrementer');
-        $methodIncrementer->setAccessible(true);
-        $this->assertInstanceOf(Incrementer\StatsD::class, $methodIncrementer->invoke($statsClient));
-
-        $methodState = $reflection->getMethod('getState');
-        $methodState->setAccessible(true);
-        $this->assertInstanceOf(State\StatsD::class, $methodState->invoke($statsClient));
     }
 
     public function testHTTPRequestSection()
