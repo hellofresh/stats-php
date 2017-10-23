@@ -60,6 +60,7 @@ class HTTPRequestTest extends TestCase
 
         $callback->expects($this->once())
             ->method('__invoke')
+            ->with($this->isInstanceOf(MetricOperation::class), $this->equalTo($request))
             ->will($this->returnValue(new MetricOperation(['new', 'metric', 'here'])));
 
         $bucket = new HTTPRequest('baz', $request, true, $callback);

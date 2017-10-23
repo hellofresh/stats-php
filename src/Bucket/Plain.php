@@ -75,7 +75,7 @@ class Plain implements Bucket
      */
     public static function sanitizeMetricName($metric)
     {
-        if ($metric == "") {
+        if ($metric === '') {
             return Bucket::METRIC_EMPTY_PLACEHOLDER;
         }
 

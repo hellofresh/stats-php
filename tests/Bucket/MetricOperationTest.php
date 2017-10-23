@@ -45,6 +45,18 @@ class MetricOperationTest extends TestCase
                 ['foo', 'bar', 'baz'],
                 ['one' => 'foo', 'two' => 'bar', 'three' => 'baz', 'four' => 'qux'],
             ],
+            [
+                ['-', '-', '-'],
+                [null],
+            ],
+            [
+                ['-', '-', '-'],
+                [new \stdClass()],
+            ],
+            [
+                ['-', '-', '-'],
+                [''],
+            ],
         ];
     }
 }
