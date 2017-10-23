@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Bucket;
-
 
 use HelloFresh\Stats\Bucket;
 
@@ -43,6 +41,7 @@ class MetricOperation extends \SplFixedArray
         }
 
         $str = (string)$value;
+
         return empty($str) ? Bucket::METRIC_EMPTY_PLACEHOLDER : $str;
     }
 }

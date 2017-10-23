@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Bucket;
-
 
 use HelloFresh\Stats\HTTPMetricAlterCallback;
 use Psr\Http\Message\RequestInterface;

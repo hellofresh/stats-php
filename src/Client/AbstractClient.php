@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Client;
-
 
 use HelloFresh\Stats\Bucket;
 use HelloFresh\Stats\Bucket\MetricOperation;
@@ -97,6 +95,7 @@ abstract class AbstractClient implements Client
     public function setHTTPMetricAlterCallback(HTTPMetricAlterCallback $callback)
     {
         $this->httpMetricAlterCallback = $callback;
+
         return $this;
     }
 
@@ -114,6 +113,7 @@ abstract class AbstractClient implements Client
     public function setHTTPRequestSection($section)
     {
         $this->httpRequestSection = $section;
+
         return $this;
     }
 

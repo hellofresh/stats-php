@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Incrementer;
-
 
 use HelloFresh\Stats\Incrementer;
 use Psr\Log\LoggerInterface;
@@ -27,6 +25,7 @@ class Log extends AbstractIncrementer implements Incrementer
     public function increment($metric, $n = 1)
     {
         $this->logger->debug('Stats counter incremented', ['metric' => $metric, 'n' => $n]);
+
         return $this;
     }
 }

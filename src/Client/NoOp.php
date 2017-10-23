@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Client;
-
 
 use HelloFresh\Stats\Client;
 use HelloFresh\Stats\Incrementer;
@@ -39,6 +37,7 @@ class NoOp extends AbstractClient implements Client
         if (null === $this->incrementer) {
             $this->incrementer = new Incrementer\NoOp();
         }
+
         return $this->incrementer;
     }
 
@@ -50,6 +49,7 @@ class NoOp extends AbstractClient implements Client
         if (null === $this->state) {
             $this->state = new State\NoOp();
         }
+
         return $this->state;
     }
 }

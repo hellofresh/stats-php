@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Client;
-
 
 use HelloFresh\Stats;
 use HelloFresh\Stats\Bucket;

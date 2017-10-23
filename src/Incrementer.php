@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats;
-
 
 interface Incrementer
 {
@@ -9,7 +7,7 @@ interface Incrementer
      * Increments metric.
      *
      * @param string $metric
-     * @param int $n
+     * @param int    $n
      *
      * @return self
      */
@@ -19,7 +17,7 @@ interface Incrementer
      * Increments all metrics for given bucket.
      *
      * @param Bucket $bucket
-     * @param int $n
+     * @param int    $n
      *
      * @return void
      */

@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Incrementer;
-
 
 use HelloFresh\Stats\Incrementer;
 use League\StatsD\Client;
@@ -27,6 +25,7 @@ class StatsD extends AbstractIncrementer implements Incrementer
     public function increment($metric, $n = 1)
     {
         $this->client->increment($metric, $n);
+
         return $this;
     }
 }

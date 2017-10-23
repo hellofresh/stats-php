@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Timer;
-
 
 class Metric
 {
@@ -13,7 +11,7 @@ class Metric
     /**
      * Metric constructor.
      * @param string $metric
-     * @param float $elapsed
+     * @param float  $elapsed
      */
     public function __construct($metric, $elapsed)
     {
@@ -50,6 +48,7 @@ class Metric
             } elseif ($this->elapsed < 0.001) {
                 return (int)($this->elapsed * 1000000) . 'µs';
             }
+
             return (int)($this->elapsed * 1000) . 'ms';
         }
 
@@ -72,6 +71,7 @@ class Metric
 
         $hours = ($minutes - $minutes % 60) / 60;
         $minutes = $minutes % 60;
+
         return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
     }
 

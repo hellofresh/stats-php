@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Timer;
-
 
 use HelloFresh\Stats\Timer;
 
@@ -20,6 +18,7 @@ class Memory implements Timer
     public function start()
     {
         $this->startedAt = microtime(true);
+
         return $this;
     }
 
@@ -30,6 +29,7 @@ class Memory implements Timer
     {
         $this->elapsed = microtime(true) - $this->startedAt;
         $this->metric = $metric;
+
         return $this;
     }
 

@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Incrementer;
-
 
 use HelloFresh\Stats\Bucket;
 use HelloFresh\Stats\Incrementer;

@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Timer;
-
 
 use HelloFresh\Stats\Timer;
 use Psr\Log\LoggerInterface;
@@ -29,6 +27,7 @@ class Log implements Timer
     public function start()
     {
         $this->startedAt = microtime(true);
+
         return $this;
     }
 
@@ -44,6 +43,7 @@ class Log implements Timer
                 'elapsed' => (new Metric('', microtime(true) - $this->startedAt))->getElapsedFormatted(),
             ]
         );
+
         return $this;
     }
 }

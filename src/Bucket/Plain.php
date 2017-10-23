@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Bucket;
-
 
 use Behat\Transliterator\Transliterator;
 use HelloFresh\Stats\Bucket;
@@ -20,9 +18,9 @@ class Plain implements Bucket
     /**
      * Plain constructor.
      *
-     * @param string $section
+     * @param string          $section
      * @param MetricOperation $operation
-     * @param bool $success
+     * @param bool            $success
      */
     public function __construct($section, MetricOperation $operation, $success)
     {

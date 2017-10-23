@@ -1,13 +1,11 @@
 <?php
-
 namespace HelloFresh\Stats;
-
 
 interface State
 {
     /**
      * @param string $metric
-     * @param int $state
+     * @param int    $state
      *
      * @return void
      */

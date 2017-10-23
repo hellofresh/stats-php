@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Bucket;
-
 
 use PHPUnit\Framework\TestCase;
 

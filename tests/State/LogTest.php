@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\State;
-
 
 use PHPUnit\Framework\TestCase;
 

@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats;
-
 
 use Psr\Log\LoggerInterface;
 
@@ -15,11 +13,11 @@ class Factory
     /**
      * Builds Stats Client instance.
      *
-     * @param string $dsn
+     * @param string          $dsn
      * @param LoggerInterface $logger
      *
-     * @return Client
      * @throws \Exception
+     * @return Client
      */
     public static function build($dsn, LoggerInterface $logger)
     {

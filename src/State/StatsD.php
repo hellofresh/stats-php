@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\State;
-
 
 use HelloFresh\Stats\State;
 use League\StatsD\Client;

@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Timer;
-
 
 use PHPUnit\Framework\TestCase;
 

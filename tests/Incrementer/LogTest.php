@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Incrementer;
-
 
 use PHPUnit\Framework\TestCase;
 

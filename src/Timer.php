@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats;
-
 
 interface Timer
 {

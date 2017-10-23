@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Bucket;
-
 
 use PHPUnit\Framework\TestCase;
 
@@ -10,13 +8,13 @@ class PlainTest extends TestCase
     /**
      * @dataProvider metrics
      *
-     * @param string $section
+     * @param string          $section
      * @param MetricOperation $operation
-     * @param bool $success
-     * @param string $metric
-     * @param string $metricWithSuffix
-     * @param string $metricTotal
-     * @param string $metricTotalWithSuffix
+     * @param bool            $success
+     * @param string          $metric
+     * @param string          $metricWithSuffix
+     * @param string          $metricTotal
+     * @param string          $metricTotalWithSuffix
      */
     public function testPlain(
         $section,

@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Client;
-
 
 use HelloFresh\Stats\Client;
 use HelloFresh\Stats\Incrementer;
@@ -33,6 +31,7 @@ class Memory extends AbstractClient implements Client
         if (null === $this->incrementer) {
             $this->incrementer = new Incrementer\Memory();
         }
+
         return $this->incrementer;
     }
 
@@ -44,6 +43,7 @@ class Memory extends AbstractClient implements Client
         if (null === $this->state) {
             $this->state = new State\Memory();
         }
+
         return $this->state;
     }
 
@@ -54,6 +54,7 @@ class Memory extends AbstractClient implements Client
     {
         $timer = new Timer\Memory();
         $this->timers[] = $timer;
+
         return $timer;
     }
 

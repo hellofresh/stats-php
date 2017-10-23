@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Timer;
-
 
 use HelloFresh\Stats\Timer;
 use League\StatsD\Client;
@@ -29,6 +27,7 @@ class StatsD implements Timer
     public function start()
     {
         $this->startedAt = microtime(true);
+
         return $this;
     }
 
@@ -40,6 +39,7 @@ class StatsD implements Timer
         // must be in ms, so multiply seconds by 1k
         $time = round((microtime(true) - $this->startedAt) * 1000, 4);
         $this->client->timing($metric, $time);
+
         return $this;
     }
 }

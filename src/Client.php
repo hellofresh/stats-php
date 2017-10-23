@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats;
-
 
 use HelloFresh\Stats\Bucket\MetricOperation;
 use Psr\Http\Message\RequestInterface;
@@ -19,8 +17,8 @@ interface Client
      * Tracks HTTP Request stats.
      *
      * @param RequestInterface $request
-     * @param Timer $timer
-     * @param bool $success
+     * @param Timer            $timer
+     * @param bool             $success
      *
      * @return self
      */
@@ -29,11 +27,11 @@ interface Client
     /**
      * Tracks custom operation with n diff.
      *
-     * @param string $section
+     * @param string          $section
      * @param MetricOperation $operation
-     * @param bool $success
-     * @param Timer|null $timer
-     * @param int $n
+     * @param bool            $success
+     * @param Timer|null      $timer
+     * @param int             $n
      *
      * @return self
      */
@@ -42,10 +40,10 @@ interface Client
     /**
      * Tracks custom metric, w/out ok/fail additional sections.
      *
-     * @param string $section
+     * @param string          $section
      * @param MetricOperation $operation
-     * @param Timer|null $timer
-     * @param int $n
+     * @param Timer|null      $timer
+     * @param int             $n
      *
      * @return mixed
      */
@@ -54,9 +52,9 @@ interface Client
     /**
      * Tracks metric absolute value.
      *
-     * @param string $section
+     * @param string          $section
      * @param MetricOperation $operation
-     * @param int $value
+     * @param int             $value
      *
      * @return self
      */

@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Client;
-
 
 use HelloFresh\Stats\Client;
 use HelloFresh\Stats\HTTPMetricAlterCallback;
@@ -46,6 +44,7 @@ class StatsD extends AbstractClient implements Client
         $url = (array)parse_url($dsn);
 
         parse_str(empty($url['query']) ? '' : $url['query'], $params);
+
         return [
             'host' => empty($url['host']) ? 'localhost' : $url['host'],
             'port' => empty($url['port']) ? 8125 : $url['port'],
@@ -71,6 +70,7 @@ class StatsD extends AbstractClient implements Client
         if (null === $this->incrementer) {
             $this->incrementer = new Incrementer\StatsD($this->client);
         }
+
         return $this->incrementer;
     }
 
@@ -82,6 +82,7 @@ class StatsD extends AbstractClient implements Client
         if (null === $this->state) {
             $this->state = new State\StatsD($this->client);
         }
+
         return $this->state;
     }
 }

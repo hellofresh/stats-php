@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\Client;
-
 
 use HelloFresh\Stats\Client;
 use HelloFresh\Stats\Incrementer;
@@ -46,6 +44,7 @@ class Log extends AbstractClient implements Client
         if (null === $this->incrementer) {
             $this->incrementer = new Incrementer\Log($this->logger);
         }
+
         return $this->incrementer;
     }
 
@@ -57,6 +56,7 @@ class Log extends AbstractClient implements Client
         if (null === $this->state) {
             $this->state = new State\Log($this->logger);
         }
+
         return $this->state;
     }
 }
