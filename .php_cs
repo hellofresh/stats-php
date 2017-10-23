@@ -10,7 +10,6 @@ return PhpCsFixer\Config::create()
         '@PSR2' => true,
         'array_syntax' => ['syntax' => 'short'],
 
-        // additional symfony fixers
         'blank_line_after_namespace' => true,
         'blank_line_before_return' => true,
         'concat_space' => ['spacing' => 'one'],
@@ -33,7 +32,6 @@ return PhpCsFixer\Config::create()
         'single_blank_line_at_eof' => true,
         'single_quote' => true,
         'trailing_comma_in_multiline_array' => true,
-        // additional contrib fixers
         'ordered_imports' => true,
         'phpdoc_order' => true,
     ])
