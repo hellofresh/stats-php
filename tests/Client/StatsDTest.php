@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class StatsDTest extends TestCase
 {
-    public function testConfigure()
+    public function testBuildOptions()
     {
         if (!class_exists('\League\StatsD\Client')) {
             $this->markTestSkipped('Missing league/statsd package');
@@ -21,25 +21,19 @@ class StatsDTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $statsdClient = $this->getMockBuilder('\League\StatsD\Client')->getMock();
-        $statsdClient->expects($this->once())
-            ->method('configure')
-            ->with([
+        $reflection = new \ReflectionClass($statsClient);
+        $methodBuildOptions = $reflection->getMethod('buildOptions');
+        $methodBuildOptions->setAccessible(true);
+        $this->assertEquals(
+            [
                 'host' => 'stats.local',
                 'port' => 1234,
                 'namespace' => 'prefix.ns',
                 'timeout' => 2.5,
                 'throwConnectionExceptions' => false,
-            ]);
-
-        $reflection = new \ReflectionClass($statsClient);
-        $propertyClient = $reflection->getProperty('client');
-        $propertyClient->setAccessible(true);
-        $propertyClient->setValue($statsClient, $statsdClient);
-
-        $methodConfigure = $reflection->getMethod('configure');
-        $methodConfigure->setAccessible(true);
-        $methodConfigure->invoke($statsClient, 'statsd://stats.local:1234/prefix.ns?timeout=2.5&error=0');
+            ],
+            $methodBuildOptions->invoke($statsClient, 'statsd://stats.local:1234/prefix.ns?timeout=2.5&error=0')
+        );
     }
 
     public function testInstances()
