@@ -23,6 +23,7 @@ dashboards to track activity and problems.
   * `noop` for environments that do not require any stats gathering
 * Fixed metric sections count for all metrics to allow easy monitoring/alerting setup in `grafana`
 * Easy to build HTTP requests metrics - timing and count
+* Generalise or modify HTTP Requests metric - e.g. skip ID part
 
 ## Installation
 
@@ -90,6 +91,57 @@ $ordersInTheLast24Hours = OrdersService::count(60 * 60 * 24);
 $statsClient->trackState($section, $operation, $ordersInTheLast24Hours);
 ```
 
-## TODO
+### Generalise resources by type and stripping resource ID
 
-* [ ] Generalise or modify HTTP Requests metric - e.g. skip ID part
+In some cases you do not need to collect metrics for all unique requests, but a single metric for requests of the similar type,
+e.g. access time to concrete users pages does not matter a lot, but average access time is important.
+`hellofresh/stats-php` allows HTTP Request metric modification and supports ID filtering out of the box, so
+you can get generic metric `get.users.-id-` instead thousands of metrics like `get.users.1`, `get.users.13`,
+`get.users.42` etc. that may make your `graphite` suffer from overloading.
+
+To use metric generalisation by second level path ID, you can pass
+`HelloFresh\Stats\HTTPMetricAlterCallback\HasIDAtSecondLevel` instance to
+`HelloFresh\Stats\Client::setHTTPMetricAlterCallback()`. Also there is a builder method
+`HelloFresh\Stats\HTTPMetricAlterCallback\HasIDAtSecondLevel::createFromStringMap()`
+that builds a callback instance from string map, so you can get these values from config.
+It accepts a list of sections with test callback in the following format: `<section>:<test-callback-name>`.
+You can use either double colon or new line character as section-callback pairs separator, so all of the following
+forms are correct:
+
+* `<section-0>:<test-callback-name-0>:<section-1>:<test-callback-name-1>:<section-2>:<test-callback-name-2>`
+* `<section-0>:<test-callback-name-0>\n<section-1>:<test-callback-name-1>\n<section-2>:<test-callback-name-2>`
+* `<section-0>:<test-callback-name-0>:<section-1>:<test-callback-name-1>\n<section-2>:<test-callback-name-2>`
+
+Currently the following test callbacks are implemented:
+
+* `true` - second path level is always treated as ID,
+  e.g. `/users/13` -> `users.-id-`, `/users/search` -> `users.-id-`, `/users` -> `users.-id-`
+* `numeric` - only numeric second path level is interpreted as ID,
+  e.g. `/users/13` -> `users.-id-`, `/users/search` -> `users.search`
+* `not_empty` - only not empty second path level is interpreted as ID,
+  e.g. `/users/13` -> `users.-id-`, `/users` -> `users.-`
+
+You can register your own test callback functions using the
+`HelloFresh\Stats\HTTPMetricAlterCallback\HasIDAtSecondLevel::registerSectionTest()` instance method
+or the second parameter of builder method - builder method validates test callback functions against the registered list.
+
+```php
+<?php
+
+use HelloFresh\Stats\Factory;
+use HelloFresh\Stats\HTTPMetricAlterCallback\HasIDAtSecondLevel;
+
+$statsClient = Factory::build(getenv('STATS_DSN'), $logger);
+// STATS_IDS=users:numeric:search:not_empty
+$callback = HasIDAtSecondLevel::createFromStringMap(getenv('STATS_IDS'));
+$statsClient->setHTTPMetricAlterCallback($callback);
+
+$timer = $statsClient->buildTimer()->start();
+
+// GET /users/42 -> get.users.-id-
+// GET /users/edit -> get.users.edit
+// POST /users -> post.users.-
+// GET /search -> get.search.-
+// GET /search/friday%20beer -> get.search.-id-
+$statsClient->trackRequest($request, $imer, true);
+```
