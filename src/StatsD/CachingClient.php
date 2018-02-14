@@ -1,7 +1,5 @@
 <?php
-
 namespace HelloFresh\Stats\StatsD;
-
 
 use League\StatsD\Client;
 use League\StatsD\Exception\ConnectionException;
@@ -12,8 +10,8 @@ class CachingClient extends Client
     protected $socket;
 
     /**
-     * @return resource
      * @throws ConnectionException
+     * @return resource
      */
     protected function getSocket()
     {
@@ -29,9 +27,9 @@ class CachingClient extends Client
 
     /**
      * Send Data to StatsD Server
-     * @param  array $data A list of messages to send to the server
-     * @return $this
+     * @param  array               $data A list of messages to send to the server
      * @throws ConnectionException If there is a connection problem with the host
+     * @return $this
      */
     protected function send(array $data)
     {
