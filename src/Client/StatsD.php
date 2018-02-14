@@ -6,7 +6,7 @@ use HelloFresh\Stats\HTTPMetricAlterCallback;
 use HelloFresh\Stats\Incrementer;
 use HelloFresh\Stats\State;
 use HelloFresh\Stats\Timer;
-use League\StatsD\Client as StatsDClient;
+use HelloFresh\Stats\StatsD\CachingClient as StatsDClient;
 
 class StatsD extends AbstractClient implements Client
 {
@@ -26,6 +26,7 @@ class StatsD extends AbstractClient implements Client
      * StatsD constructor.
      *
      * @param string $dsn statsd connection dsn
+     * @throws \League\StatsD\Exception\ConfigurationException
      */
     public function __construct($dsn)
     {
