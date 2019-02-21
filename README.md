@@ -143,5 +143,5 @@ $timer = $statsClient->buildTimer()->start();
 // POST /users -> post.users.-
 // GET /search -> get.search.-
 // GET /search/friday%20beer -> get.search.-id-
-$statsClient->trackRequest($request, $imer, true);
+$statsClient->trackRequest($request, $timer, true);
 ```
