@@ -5,7 +5,6 @@ use HelloFresh\Stats;
 use HelloFresh\Stats\Bucket;
 use HelloFresh\Stats\Bucket\MetricOperation;
 use HelloFresh\Stats\Bucket\Plain;
-use HelloFresh\Stats\State;
 use PHPUnit\Framework\TestCase;
 
 class LogTest extends TestCase
