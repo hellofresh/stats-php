@@ -5,8 +5,8 @@ use HelloFresh\Stats\Client;
 use HelloFresh\Stats\HTTPMetricAlterCallback;
 use HelloFresh\Stats\Incrementer;
 use HelloFresh\Stats\State;
-use HelloFresh\Stats\StatsD\CachingClient as StatsDClient;
 use HelloFresh\Stats\Timer;
+use League\StatsD\Client as StatsDClient;
 use League\StatsD\Exception\ConfigurationException;
 
 class StatsD extends AbstractClient implements Client
