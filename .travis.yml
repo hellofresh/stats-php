@@ -5,8 +5,10 @@ php:
   - '7.1'
 
 env:
-  - COMPOSER_UPDATE=
-  - COMPOSER_UPDATE=--prefer-lowest
+
+before_install:
+  - ls -la /home/travis/.phpenv/versions/*/etc/conf.d/
+  - php -i
 
 script:
   - composer update $COMPOSER_UPDATE -n
