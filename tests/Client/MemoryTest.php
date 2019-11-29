@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class MemoryTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         mt_srand(time());
     }

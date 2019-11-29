@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class NoOpTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         mt_srand(time());
     }
