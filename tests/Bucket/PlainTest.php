@@ -37,7 +37,7 @@ class PlainTest extends TestCase
     {
         $this->assertEquals('-', Plain::sanitizeMetricName(''));
 
-        $this->assertEquals('-u-iunikod', Plain::sanitizeMetricName('юникод'));
+        $this->assertEquals('-u-unikod', Plain::sanitizeMetricName('юникод'));
         $this->assertEquals('-u-Apollon', Plain::sanitizeMetricName('Ἀπόλλων'));
         $this->assertEquals('-u-acougue', Plain::sanitizeMetricName('açougue'));
 
@@ -49,7 +49,7 @@ class PlainTest extends TestCase
             Plain::sanitizeMetricName('metric.with.dots_and_underscores')
         );
 
-        $this->assertEquals('-u-iunikod_metrika', Plain::sanitizeMetricName('юникод.метрика'));
+        $this->assertEquals('-u-unikod_metrika', Plain::sanitizeMetricName('юникод.метрика'));
     }
 
     public function metrics()

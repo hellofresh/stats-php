@@ -64,22 +64,20 @@ class HasIDAtSecondLevelTest extends TestCase
 
     /**
      * @dataProvider createFromStringMapProvider
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid sections format
      *
      * @param string $map
      */
     public function testCreateFromStringMap_InvalidFormat($map)
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid sections format');
         HasIDAtSecondLevel::createFromStringMap($map);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Unknown section test callback name: foo
-     */
     public function testCreateFromStringMap_UnknownSectionTest()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Unknown section test callback name: foo');
         HasIDAtSecondLevel::createFromStringMap('users:foo');
     }
 
