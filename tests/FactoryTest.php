@@ -27,14 +27,13 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf(Client\StatsD::class, Factory::build('statsd://qwe:1234/asd', $logger));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Unknown client type
-     */
     public function testUnknownClient()
     {
         /** @var \PHPUnit_Framework_MockObject_MockObject|\Psr\Log\LoggerInterface $logger */
         $logger = $this->getMockBuilder('\Psr\Log\LoggerInterface')->getMock();
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Unknown client type');
 
         Factory::build(uniqid(), $logger);
     }

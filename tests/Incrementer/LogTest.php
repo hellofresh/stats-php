@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class LogTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         mt_srand(time());
     }

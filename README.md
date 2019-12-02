@@ -16,7 +16,9 @@ dashboards to track activity and problems.
 
 ## Supported PHP versions
 
-`stats-php` version `1.x` supports the following PHP version: `7.0`, `7.1`, `7.2`. If you going to use the library with newer PHP versions - consider using version `2.x+`. 
+`stats-php` version `1.x` supports the following PHP version: `7.0`, `7.1`, `7.2`. If you going to use the library with newer PHP versions - consider using version `2.x+`.
+
+Since version `2.x`, this library start using the built-in `intl` PHP extension instead of `behat/transliterator`
 
 ## Key Features
 
@@ -28,6 +30,18 @@ dashboards to track activity and problems.
 * Fixed metric sections count for all metrics to allow easy monitoring/alerting setup in `grafana`
 * Easy to build HTTP requests metrics - timing and count
 * Generalise or modify HTTP Requests metric - e.g. skip ID part
+
+## Dependencies
+
+### Version `1.x`
+
+- `php: >= 7.0`
+- `behat/transliterator: ^1.2`
+
+### Version `2.x`
+
+- `php: >= 7.3`
+- `ext-intl: >= 2.0`
 
 ## Installation
 

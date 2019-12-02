@@ -1,7 +1,6 @@
 <?php
 namespace HelloFresh\Stats\Bucket;
 
-use Behat\Transliterator\Transliterator;
 use HelloFresh\Stats\Bucket;
 
 class Plain implements Bucket
@@ -78,7 +77,7 @@ class Plain implements Bucket
         }
 
         // convert unicode symbols to ASCII
-        $asciiMetric = Transliterator::utf8ToAscii($metric);
+        $asciiMetric = transliterator_transliterate('Any-Latin; Latin-ASCII;', $metric);
         if ($asciiMetric != $metric) {
             $metric = Bucket::PREFIX_UNICODE . $asciiMetric;
         }
