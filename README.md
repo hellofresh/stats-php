@@ -35,7 +35,7 @@ Since version `2.x`, this library start using the built-in `intl` PHP extension 
 
 ### Version `1.x`
 
-- `php: >= 5.6`
+- `php: >= 7.0`
 - `behat/transliterator: ^1.2`
 
 ### Version `2.x`
