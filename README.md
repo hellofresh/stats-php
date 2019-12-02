@@ -14,6 +14,10 @@
 This is generic stats library that we at HelloFresh use in our projects to collect services' stats and then create monitoring
 dashboards to track activity and problems.
 
+## Supported PHP versions
+
+`stats-php` version `1.x` supports the following PHP version: `7.0`, `7.1`, `7.2`. If you going to use the library with newer PHP versions - consider using version `2.x+`. 
+
 ## Key Features
 
 * Several stats backends:
