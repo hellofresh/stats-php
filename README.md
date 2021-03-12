@@ -1,12 +1,5 @@
-<p align="center">
-  <a href="https://hellofresh.com">
-    <img width="120" src="https://www.hellofresh.de/images/hellofresh/press/HelloFresh_Logo.png">
-  </a>
-</p>
-
 # hellofresh/stats-php
 
-[![Build Status](https://travis-ci.org/hellofresh/stats-php.svg?branch=master)](https://travis-ci.org/hellofresh/stats-php)
 [![codecov](https://codecov.io/gh/hellofresh/stats-php/branch/master/graph/badge.svg)](https://codecov.io/gh/hellofresh/stats-php)
 
 > Generic Stats library written in PHP
@@ -16,7 +9,8 @@ dashboards to track activity and problems.
 
 ## Supported PHP versions
 
-`stats-php` version `1.x` supports the following PHP version: `7.0`, `7.1`, `7.2`. If you going to use the library with newer PHP versions - consider using version `2.x+`.
+`stats-php` version `1.x` supports the following PHP version: `7.0`, `7.1`, `7.2`.
+If you are going to use the library with newer PHP versions - consider using version `2.x+`.
 
 Since version `2.x`, this library start using the built-in `intl` PHP extension instead of `behat/transliterator`
 
