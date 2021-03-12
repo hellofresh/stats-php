@@ -24,7 +24,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '5.6'
+          php-version: '7.0'
           tools: composer:v1
       - name: Install composer deps
         run: composer update ${{ matrix.composer }} -n
