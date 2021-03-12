@@ -1,0 +1,41 @@
+name: Testing
+
+on:
+  push:
+    branches: [ 1.x ]
+  pull_request:
+    branches: [ 1.x ]
+  release:
+    types:
+      - created
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        composer:
+          - ""
+          - --prefer-lowest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.0'
+          tools: composer:v1
+      - name: Install composer deps
+        run: composer update ${{ matrix.composer }} -n
+      - name: Run php-cs-fixer
+        run: vendor/bin/php-cs-fixer fix --dry-run -v
+      - name: Run PhpUnit
+        run: vendor/bin/phpunit --coverage-clover=coverage.xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        if: success()
+        with:
+          file: ./coverage.xml
+          fail_ci_if_error: false
