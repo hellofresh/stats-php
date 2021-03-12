@@ -1,12 +1,5 @@
-<p align="center">
-  <a href="https://hellofresh.com">
-    <img width="120" src="https://www.hellofresh.de/images/hellofresh/press/HelloFresh_Logo.png">
-  </a>
-</p>
-
 # hellofresh/stats-php
 
-[![Build Status](https://travis-ci.org/hellofresh/stats-php.svg?branch=master)](https://travis-ci.org/hellofresh/stats-php)
 [![codecov](https://codecov.io/gh/hellofresh/stats-php/branch/master/graph/badge.svg)](https://codecov.io/gh/hellofresh/stats-php)
 
 > Generic Stats library written in PHP
