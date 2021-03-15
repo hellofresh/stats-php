@@ -51,7 +51,7 @@ class MemoryTest extends TestCase
         $timer2->finish($metric2);
 
         $timers = $statsClient->getTimers();
-        $this->assertEquals(2, count($timers));
+        $this->assertCount(2, $timers);
 
         $this->assertEquals($timer1, $timers[0]);
         $this->assertEquals($timer2, $timers[1]);
@@ -89,10 +89,10 @@ class MemoryTest extends TestCase
         $statsClient->trackMetric($section2, new Bucket\MetricOperation([$operation2]), $timer22, $n22);
 
         $timers = $statsClient->getTimers();
-        $this->assertEquals(4, count($timers));
+        $this->assertCount(4, $timers);
 
         $metrics = $statsClient->getIncrementedMetrics();
-        $this->assertEquals(4, count($metrics));
+        $this->assertCount(4, $metrics);
 
         $this->assertArrayHasKey($metric1, $metrics);
         $this->assertEquals($n11 + $n12, $metrics[$metric1]);
@@ -125,7 +125,7 @@ class MemoryTest extends TestCase
         $statsClient->trackState($section2, new Bucket\MetricOperation([$operation2]), $n22);
 
         $states = $statsClient->getStateMetrics();
-        $this->assertEquals(2, count($states));
+        $this->assertCount(2, $states);
 
         $this->assertArrayHasKey($metric1, $states);
         $this->assertEquals($n12, $states[$metric1]);
