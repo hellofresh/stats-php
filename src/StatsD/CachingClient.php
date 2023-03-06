@@ -41,9 +41,9 @@ class CachingClient extends Client
                 $messages[] = $prefix . $key . ':' . $value;
             }
             $this->message = implode("\n", $messages);
-            @fwrite($socket, $this->message);
+            fwrite($socket, $this->message);
             fflush($socket);
-        } catch (ConnectionException $e) {
+        } catch (\Exception $e) {
             if ($this->throwConnectionExceptions) {
                 throw $e;
             } else {
