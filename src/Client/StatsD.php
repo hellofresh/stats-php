@@ -5,8 +5,8 @@ use HelloFresh\Stats\Client;
 use HelloFresh\Stats\HTTPMetricAlterCallback;
 use HelloFresh\Stats\Incrementer;
 use HelloFresh\Stats\State;
-use HelloFresh\Stats\StatsD\SilentClient as StatsDClient;
 use HelloFresh\Stats\Timer;
+use League\StatsD\Client as StatsDClient;
 use League\StatsD\Exception\ConfigurationException;
 
 class StatsD extends AbstractClient implements Client
@@ -26,12 +26,14 @@ class StatsD extends AbstractClient implements Client
     /**
      * StatsD constructor.
      *
-     * @param  string                 $dsn statsd connection dsn
+     * @param string $dsn    statsd connection dsn
+     * @param Client $client statsd client
+     *
      * @throws ConfigurationException
      */
-    public function __construct($dsn)
+    public function __construct(string $dsn, $client = StatsDClient::class)
     {
-        $this->client = new StatsDClient();
+        $this->client = new $client();
         $this->client->configure($this->buildOptions($dsn));
         $this->resetHTTPRequestSection();
     }
@@ -41,7 +43,7 @@ class StatsD extends AbstractClient implements Client
      *
      * @return array
      */
-    protected function buildOptions($dsn)
+    protected function buildOptions(string $dsn): array
     {
         $url = (array)parse_url($dsn);
 
