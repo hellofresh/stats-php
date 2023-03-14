@@ -53,7 +53,7 @@ class StatsDTest extends TestCase
         $statsD = new ExposedClientStatsD($dns);
         $instantiatedClient = $statsD->getClient();
 
-        $this->assertInstanceOf(Client::class, $instantiatedClient);
+        $this->assertInstanceOf(Stats\StatsD\SilentClient::class, $instantiatedClient);
     }
 
     /**
@@ -62,10 +62,10 @@ class StatsDTest extends TestCase
     public function testOptionalClientInstance()
     {
         $dns = 'statsd://stats.local:1234/prefix.ns?timeout=2.5&error=0';
-        $statsD = new ExposedClientStatsD($dns, Stats\StatsD\SilentClient::class);
+        $statsD = new ExposedClientStatsD($dns, Client::class);
         $instantiatedClient = $statsD->getClient();
 
-        $this->assertInstanceOf(Stats\StatsD\SilentClient::class, $instantiatedClient);
+        $this->assertInstanceOf(Client::class, $instantiatedClient);
     }
 
     public function testInstances()
