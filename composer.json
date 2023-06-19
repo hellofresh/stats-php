@@ -23,7 +23,7 @@
   "require": {
     "php": ">= 7.3",
     "ext-intl": ">= 2.0",
-    "psr/http-message": "^1.0",
+    "psr/http-message": "^2.0",
     "psr/log": "^1.0"
   },
   "require-dev": {
