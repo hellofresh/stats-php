@@ -28,7 +28,7 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.16",
-    "phpunit/phpunit": "^8.4",
+    "phpunit/phpunit": "^11.2",
     "league/statsd": "^1.5"
   },
   "suggest": {
